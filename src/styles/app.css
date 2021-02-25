@@ -1,0 +1,15 @@
+.word {
+    margin-bottom: 10px;
+}
+
+.word span {
+    margin: 0 5px;
+    padding: 0 2px;
+    border-bottom: 1px solid #000;
+}
+
+form input[type=text] {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
