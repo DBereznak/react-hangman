@@ -16,9 +16,11 @@ class App extends React.Component {
       guesses: 0,
       message: "",
       disabled: "",
+      displayButton: {display: "none"}
     };
     this.getUserLetter = this.getUserLetter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getNewWord = this.getNewWord.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,7 @@ class App extends React.Component {
       guesses: 0,
       message: "",
       disabled: "",
+      displayButton: {display: "none"},
     });
   }
 
@@ -45,13 +48,8 @@ class App extends React.Component {
           ""
         )}`,
         disabled: "disabled",
+        displayButton: {display: "block"},
       });
-      setTimeout(() => {
-        this.getNewWord();
-        this.setState({
-          guesses: 0,
-        });
-      }, 2000);
     }
     const realWord = this.state.letters.join("");
     const userGuessedWord = this.state.emptyWord.join("");
@@ -86,14 +84,18 @@ class App extends React.Component {
           ""
         )} is the right word`,
         disabled: "disabled",
+        displayButton: {display: "block"},
       });
-      setTimeout(() => {
-        this.getNewWord();
-      }, 2000);
     }
     event.preventDefault();
   }
   render() {
+    let button = "Hio there";
+    if(this.state.finishedRound) {
+      button = <button onClick={this.getNewWord}>Play Again</button>;
+    } else {
+      button = "";
+    }
     return (
       <div className="App ui box">
         <header className="ui center aligned header">
@@ -132,6 +134,7 @@ class App extends React.Component {
             <h3>strikes:{this.state.guesses}</h3>
           </div>
           <Message messageState={this.state.message} />
+          <div><button style={this.state.displayButton} onClick={this.getNewWord}>Play Again</button></div>
         </div>
       </div>
     );
