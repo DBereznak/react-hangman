@@ -1,0 +1,9 @@
+#root {
+    width: 400px;
+    margin: 25px auto;
+}
+
+.box {
+    width: 500px;
+    background-color: #fff;
+}

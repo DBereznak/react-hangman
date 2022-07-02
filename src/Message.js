@@ -4,7 +4,7 @@ const Message = (props) => {
   const messageState = props.messageState;
   return (
     <div className="message">
-      <h3>{messageState}</h3>
+      <h2>{messageState}</h2>
     </div>
   );
 };

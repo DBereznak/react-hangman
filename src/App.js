@@ -1,5 +1,6 @@
 import React from "react";
 import randomWord from "random-words";
+//import getWord from "./getWord";
 import HangmanImage from "./HangmanImage";
 import Message from "./Message";
 import "./styles/app.css";
@@ -26,6 +27,7 @@ class App extends React.Component {
 
   getNewWord() {
     const word = randomWord();
+    console.log(word);
     this.setState({
       letters: word.split(""),
       emptyWord: new Array(word.length).fill("*"),
@@ -36,14 +38,19 @@ class App extends React.Component {
   }
 
   checkWin() {
-    if (this.state.guesses === 6) {
+    if (this.state.guesses > 4) {
       this.setState({
-        guesses: 0,
-        message: "Sorry, you did not guess the word",
+        guesses: 6,
+        message: `Sorry, you did not guess the word. The word was  ${this.state.letters.join(
+          ""
+        )}`,
         disabled: "disabled",
       });
       setTimeout(() => {
         this.getNewWord();
+        this.setState({
+          guesses: 0,
+        });
       }, 2000);
     }
     const realWord = this.state.letters.join("");
@@ -75,7 +82,9 @@ class App extends React.Component {
     }
     if (this.checkWin()) {
       this.setState({
-        message: "Congratulations, that is the right word",
+        message: `Congratulations, ${this.state.letters.join(
+          ""
+        )} is the right word`,
         disabled: "disabled",
       });
       setTimeout(() => {
@@ -86,30 +95,43 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App ui box">
+        <header className="ui center aligned header">
+          <img
+            style={{ width: "100%" }}
+            src="https://res.cloudinary.com/album/image/upload/v1614735885/hangman/Hangman-Titlecard_800px.png"
+            alt="Hangman"
+          />
+        </header>
         <HangmanImage sequence={this.state.guesses} />
-        <Message messageState={this.state.message} />
-        <h1>{this.state.letters}</h1>
-        <div className="word">
-          {this.state.emptyWord.map((letter, index) => (
-            <span className="letter" key={index}>
-              {letter}
-            </span>
-          ))}
-        </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.userLetter}
-            maxLength="1"
-            onChange={this.getUserLetter}
-            disabled={this.state.disabled}
-          ></input>
-          <input type="submit" value="Submit" disabled={this.state.disabled} />
-        </form>
-        <div>
-          <h3>strikes:{this.state.guesses}</h3>
+        <div className="content ui segment">
+          <div className="word center aligned">
+            {this.state.emptyWord.map((letter, index) => (
+              <span className="letter" key={index}>
+                {letter}
+              </span>
+            ))}
+          </div>
+
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.userLetter.toLowerCase()}
+              maxLength="1"
+              onChange={this.getUserLetter}
+              disabled={this.state.disabled}
+            ></input>
+            <input
+              type="submit"
+              value="Submit"
+              disabled={this.state.disabled}
+            />
+          </form>
+          <div>
+            <h3>strikes:{this.state.guesses}</h3>
+          </div>
+          <Message messageState={this.state.message} />
         </div>
       </div>
     );
