@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Link you vercel server
+# Link to vercel server
 https://vercel.com/dbereznak1/hangman/HRH5r97c5b3y7yYmzVvwphzr5GTk
 
 # Link to Hangman game
