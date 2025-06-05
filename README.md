@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+
+# React Hangman 2.0
+
+updated React version. Added a AI generated image that I chopped up instead of using the old stick figures I was using. Added keeeping track of words correct, 
+and you can't submit a empty input on the letter now.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

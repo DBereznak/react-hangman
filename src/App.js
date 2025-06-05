@@ -1,6 +1,5 @@
 import React from "react";
-import randomWord from "random-words";
-//import getWord from "./getWord";
+import {generate } from "random-words";
 import HangmanImage from "./HangmanImage";
 import Message from "./Message";
 import "./styles/app.css";
@@ -16,6 +15,7 @@ class App extends React.Component {
       guesses: 0,
       message: "",
       disabled: "",
+      wordsCorrect: 0,
       displayButton: {display: "none"}
     };
     this.getUserLetter = this.getUserLetter.bind(this);
@@ -28,14 +28,15 @@ class App extends React.Component {
   }
 
   getNewWord() {
-    const word = randomWord();
+    const word = generate({ minLength: 5, maxLength: 10 });
     console.log(word);
     this.setState({
       letters: word.split(""),
       emptyWord: new Array(word.length).fill("*"),
       guesses: 0,
       message: "",
-      disabled: "",
+      letterDisabled: "",
+      buttonDisabled: "disabled",
       displayButton: {display: "none"},
     });
   }
@@ -57,6 +58,11 @@ class App extends React.Component {
   }
 
   getUserLetter(event) {
+    if (event.target.value.length > 0) {
+      this.setState({ buttonDisabled: "" });
+    } else {
+      this.setState({ buttonDisabled: "disabled" });
+    }
     this.setState({ userLetter: event.target.value });
   }
 
@@ -67,7 +73,7 @@ class App extends React.Component {
       if (this.state.userLetter === this.state.letters[i]) {
         let temp = this.state.emptyWord;
         temp[i] = this.state.userLetter;
-        this.setState({ emptyWord: temp, userLetter: "" });
+        this.setState({ emptyWord: temp, userLetter: "", buttonDisabled: "disabled" });
         invalidGuess = false;
       }
     }
@@ -76,6 +82,7 @@ class App extends React.Component {
         guesses: this.state.guesses + 1,
         userLetter: "",
         message: "",
+        buttonDisabled: "disabled",
       });
     }
     if (this.checkWin()) {
@@ -85,29 +92,31 @@ class App extends React.Component {
         )} is the right word`,
         disabled: "disabled",
         displayButton: {display: "block"},
+        wordsCorrect: this.state.wordsCorrect + 1
       });
     }
     event.preventDefault();
   }
   render() {
     let button = "Hio there";
-    if(this.state.finishedRound) {
-      button = <button onClick={this.getNewWord}>Play Again</button>;
-    } else {
-      button = "";
-    }
+    // if(this.state.finishedRound) {
+    //   button = <button onClick={this.getNewWord}>Play Again</button>;
+    // } else {
+    //   button = "";
+    // }
     return (
       <div className="App ui box">
         <header className="ui center aligned header">
           <img
-            style={{ width: "100%" }}
+            style={{ width: "100%", backgroundColor: "#35aadc", margin: "0 auto" }}
             src="https://res.cloudinary.com/album/image/upload/v1614735885/hangman/Hangman-Titlecard_800px.png"
             alt="Hangman"
           />
         </header>
-        <HangmanImage sequence={this.state.guesses} />
+        <HangmanImage sequence={this.state.guesses} correctWordCount={ this.state.wordsCorrect} />
 
         <div className="content ui segment">
+          <div className="left">
           <div className="word center aligned">
             {this.state.emptyWord.map((letter, index) => (
               <span className="letter" key={index}>
@@ -115,26 +124,26 @@ class App extends React.Component {
               </span>
             ))}
           </div>
-
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               value={this.state.userLetter.toLowerCase()}
               maxLength="1"
               onChange={this.getUserLetter}
-              disabled={this.state.disabled}
+              disabled={this.state.letterDisabled}
             ></input>
-            <input
+            <input class="button"
               type="submit"
               value="Submit"
-              disabled={this.state.disabled}
+              disabled={this.state.buttonDisabled}
             />
           </form>
-          <div>
-            <h3>strikes:{this.state.guesses}</h3>
+            <h3 class="strikes">strikes:{this.state.guesses}</h3>
           </div>
+          <div className="right">
           <Message messageState={this.state.message} />
-          <div><button style={this.state.displayButton} onClick={this.getNewWord}>Play Again</button></div>
+          <button className="button" style={this.state.displayButton} onClick={this.getNewWord}>Play Again</button>
+          </div>
         </div>
       </div>
     );

@@ -2,6 +2,8 @@ import React from "react";
 
 const HangmanImage = (props) => {
   const sequence = props.sequence;
+  const correctWordCount = props.correctWordCount;
+
   const imageSequence = [
     {
       image:
@@ -20,12 +22,12 @@ const HangmanImage = (props) => {
     },
     {
       image:
-        "https://res.cloudinary.com/album/image/upload/v1614179194/hangman/left_arm.png",
+        "https://res.cloudinary.com/album/image/upload/v1614179194/hangman/right_arm.png",
       altTag: "Left Arm",
     },
     {
       image:
-        "https://res.cloudinary.com/album/image/upload/v1614179194/hangman/right_arm.png",
+        "https://res.cloudinary.com/album/image/upload/v1614179194/hangman/left_arm.png",
       altTag: "Right Arm",
     },
     {
@@ -42,6 +44,9 @@ const HangmanImage = (props) => {
 
   return (
     <div className="image-container">
+      <div className="correct-box">
+        <h2>Words correct:  { correctWordCount }</h2>
+      </div>
       <img
         src={imageSequence[sequence].image}
         alt={imageSequence[sequence].altTag}
