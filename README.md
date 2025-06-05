@@ -8,6 +8,12 @@ and you can't submit a empty input on the letter now.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Link to vercel server
+https://vercel.com/dbereznak1/hangman/HRH5r97c5b3y7yYmzVvwphzr5GTk
+
+# Link to Hangman game
+https://hangman-k3wr73zs3-dbereznak1.vercel.app/
+
 ## Available Scripts
 
 In the project directory, you can run:
