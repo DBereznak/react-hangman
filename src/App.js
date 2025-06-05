@@ -98,12 +98,6 @@ class App extends React.Component {
     event.preventDefault();
   }
   render() {
-    let button = "Hio there";
-    // if(this.state.finishedRound) {
-    //   button = <button onClick={this.getNewWord}>Play Again</button>;
-    // } else {
-    //   button = "";
-    // }
     return (
       <div className="App ui box">
         <header className="ui center aligned header">

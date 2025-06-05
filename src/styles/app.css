@@ -10,7 +10,7 @@
 }
 
 .ui.content {
-        display: flex;
+    display: flex;
     justify-content: space-between;
     margin: 0;
     background-color: #35aadc;
