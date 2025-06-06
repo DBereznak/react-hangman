@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   checkWin() {
-    if (this.state.guesses > 4) {
+    if (this.state.guesses === 6) {
       this.setState({
         guesses: 6,
         message: `Sorry, you did not guess the word. The word was  ${this.state.letters.join(
@@ -67,6 +67,7 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     let i;
     let invalidGuess = true;
     for (i = 0; i < this.state.letters.length; i++) {
@@ -95,7 +96,6 @@ class App extends React.Component {
         wordsCorrect: this.state.wordsCorrect + 1
       });
     }
-    event.preventDefault();
   }
   render() {
     return (
@@ -118,7 +118,7 @@ class App extends React.Component {
               </span>
             ))}
           </div>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={(event) => this.handleSubmit(event)}>
             <input
               type="text"
               value={this.state.userLetter.toLowerCase()}

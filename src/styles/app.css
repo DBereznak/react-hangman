@@ -1,3 +1,9 @@
+#root {
+    width: 400px;
+    margin: 25px auto;
+}
+
+
 .word {
     margin-bottom: 10px;
 }
@@ -13,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0;
-    background-color: #35aadc;
+    background-color: #FDBB2D;
     background-image: url("https://res.cloudinary.com/album/image/upload/v1749159300/hangman/wood_plank.png");
     background-size: 100%;
 }
@@ -30,12 +36,15 @@ form input[type=text] {
 }
 
 .box {
-    background-color: #35aadc;
+    width: 500px;
+    background: #31A7DA;
+    background: linear-gradient(180deg,rgba(49, 167, 218, 1) 74%, rgba(245, 194, 68, 1) 75%);
 }
 
 .image-container img{
     width: 100%;
     height: auto;
+    object-fit: cover;
 }
 
 .strikes {
