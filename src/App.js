@@ -126,9 +126,9 @@ class App extends React.Component {
               onChange={this.getUserLetter}
               disabled={this.state.letterDisabled}
             ></input>
-            <button class="button" disabled={this.state.buttonDisabled} onClick={(event) => this.handleSubmit(event)}>Submit</button>
+            <button className="button" disabled={this.state.buttonDisabled} onClick={(event) => this.handleSubmit(event)}>Submit</button>
           </form>
-            <h3 class="strikes">strikes:{this.state.guesses}</h3>
+            <h3 className="strikes">strikes:{this.state.guesses}</h3>
           </div>
           <div className="right">
           <Message messageState={this.state.message} />

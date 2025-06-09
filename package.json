@@ -10,6 +10,7 @@
     "random-words": "^2.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-fastclick": "^3.0.2",
     "react-scripts": "^5.0.1",
     "web-vitals": "^5.0.2"
   },
