@@ -42,7 +42,7 @@ class App extends React.Component {
   }
 
   checkWin() {
-    if (this.state.guesses === 6) {
+    if (this.state.guesses === 5) {
       this.setState({
         guesses: 6,
         message: `Sorry, you did not guess the word. The word was  ${this.state.letters.join(
@@ -118,7 +118,7 @@ class App extends React.Component {
               </span>
             ))}
           </div>
-          <form onSubmit={(event) => this.handleSubmit(event)}>
+          <form>
             <input
               type="text"
               value={this.state.userLetter.toLowerCase()}
@@ -126,11 +126,7 @@ class App extends React.Component {
               onChange={this.getUserLetter}
               disabled={this.state.letterDisabled}
             ></input>
-            <input class="button"
-              type="submit"
-              value="Submit"
-              disabled={this.state.buttonDisabled}
-            />
+            <button class="button" disabled={this.state.buttonDisabled} onClick={this.handleSubmit}>Submit</button>
           </form>
             <h3 class="strikes">strikes:{this.state.guesses}</h3>
           </div>
